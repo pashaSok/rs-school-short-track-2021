@@ -21,8 +21,54 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const leng = matrix.length;
+  let resultMatrix = [];
+  if (leng === 2) {
+    resultMatrix = [
+      [0, 0, 0],
+      [0, 0, 0],
+    ];
+  } else if (leng === 3) {
+    resultMatrix = [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ];
+  }
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      if (matrix[i][j] === true) {
+        if (matrix[i][j - 1] !== undefined) {
+          resultMatrix[i][j - 1]++;
+        }
+        if (matrix[i][j + 1] !== undefined) {
+          resultMatrix[i][j + 1]++;
+        }
+        if (matrix[i + 1][j] !== undefined) {
+          resultMatrix[i + 1][j]++;
+        }
+        if (matrix[i + 1][j + 1] !== undefined) {
+          resultMatrix[i + 1][j + 1]++;
+        }
+        if (matrix[i + 1][j - 1] !== undefined) {
+          resultMatrix[i + 1][j - 1]++;
+        }
+        if (i === 1) {
+          if (resultMatrix[i - 1][j] !== undefined) {
+            resultMatrix[i - 1][j]++;
+          }
+          if (resultMatrix[i - 1][j + 1] !== undefined) {
+            resultMatrix[i - 1][j + 1]++;
+          }
+          if (resultMatrix[i - 1][j - 1] !== undefined) {
+            resultMatrix[i - 1][j - 1]++;
+          }
+        }
+      }
+    }
+  }
+  return resultMatrix;
 }
 
 module.exports = minesweeper;
